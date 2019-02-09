@@ -1,4 +1,4 @@
-function [Az El] = SolarAzEl(UTC,Lat,Lon,Alt,gmt)
+function [Az El] = SolarAzEl(UTC,Lat,Lon,Alt)
 %% Revision History:
 % Programed by Darin C. Koblick 2/17/2009
 %
@@ -48,7 +48,7 @@ else
     [y,mo,d,h,mi,s] = datevec(UTC);
     jd = juliandate(datestr([y,mo,d,h,mi,s],'yyyy/mm/dd_HH:MM:SS'),'yyyy/mm/dd_HH:MM:SS');
 end
-d = jd-2451543.5-(gmt+1)/24;
+d = jd-2451543.5;
 
 % Keplerian Elements for the Sun (geocentric)
 w = 282.9404+4.70935e-5*d; %    (longitude of perihelion degrees)
@@ -95,10 +95,10 @@ delta = asin(zequat./r).*(180/pi);
 %J2000 = jd - 2451545.0;
 hourvec = datevec(UTC);
 UTH = hourvec(:,4) + hourvec(:,5)/60 + hourvec(:,6)/3600;
-
+Lon
 %Calculate local siderial time
-GMST0=mod(L+180,360)./15;
-SIDTIME = GMST0 + UTH + Lon./15;
+GMST0=mod(L+180,360)./15
+SIDTIME = GMST0 + UTH %+ Lon./15 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Replace RA with hour angle HA
 HA = (SIDTIME.*15 - RA);
@@ -125,7 +125,7 @@ function jd = juliandate(varargin)
 idx = month <= 2;
 year(idx) = year(idx)-1;
 month(idx) = month(idx)+12;
-jd = floor( 365.25*(year + 4716.0)) + floor( 30.6001*( 06 + 1.0)) + 2.0 - ...
+jd = floor( 365.25*(year + 4716.0)) + floor( 30.6001*( month + 1.0)) + 2.0 - ...
     floor( year/100.0 ) + floor( floor( year/100.0 )/4.0 ) + day - 1524.5 + ...
     (hour  + min/60  + sec/3600)/24;
 end
