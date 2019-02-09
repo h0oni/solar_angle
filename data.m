@@ -1,4 +1,4 @@
-fileID = fopen('1.txt','r');
+fileID = fopen('12.txt','r');
 A = fscanf(fileID,'%s');
 length(A);
 con=0;

@@ -95,10 +95,10 @@ delta = asin(zequat./r).*(180/pi);
 %J2000 = jd - 2451545.0;
 hourvec = datevec(UTC);
 UTH = hourvec(:,4) + hourvec(:,5)/60 + hourvec(:,6)/3600;
-Lon
+
 %Calculate local siderial time
-GMST0=mod(L+180,360)./15
-SIDTIME = GMST0 + UTH %+ Lon./15 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+GMST0=mod(L+180,360)./15;
+SIDTIME = GMST0 + UTH+7; %+ Lon./15 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Replace RA with hour angle HA
 HA = (SIDTIME.*15 - RA);

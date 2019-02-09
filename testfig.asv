@@ -157,7 +157,9 @@ latstr=get(handles.lat,'string');
 lonstr=get(handles.lon,'string');
 lat=str2double(latstr);
 lon=str2double(lonstr);
-
+gmt=floor(lon/15);
+gmt=double2str(gmt);
+set(handles.gmt,'string',)
 con
 % d(218).data;
 for i=1:con
@@ -240,9 +242,6 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 c_info = getCursorInfo(handles.dcm_obj);
 lat=c_info.Position(1,2);
 lon=c_info.Position(1,1);
-gmt=floor(lon/15);
-% gmt=double2str(gmt);
-set(handles.gmt,'string',gmt);
 latstr=num2str(lat);
 lonstr=num2str(lon);
 set(handles.lat,'string',latstr);
