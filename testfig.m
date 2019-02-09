@@ -205,7 +205,8 @@ for i=1:360
         
     end
 end
-
+s(1,1)=2;
+global s
 for i=1:20
 [maxValue, linearIndexesOfMaxes] = max(s(:));
 maxs(i)=maxValue/con;
