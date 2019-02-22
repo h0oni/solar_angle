@@ -60,6 +60,7 @@ handles.dcm_obj = datacursormode(fig);
 set(handles.dcm_obj,'DisplayStyle','datatip',...
 'SnapToDataVertex','off','Enable','on')
 % Update handles structure
+% assignin('base','V',data);
 guidata(hObject, handles);
 
 % UIWAIT makes testfig wait for user response (see UIRESUME)
@@ -151,13 +152,12 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+gmt=6;
 data;
 latstr=get(handles.lat,'string');
 lonstr=get(handles.lon,'string');
 lat=str2double(latstr);
 lon=str2double(lonstr);
-
 con
 % d(218).data;
 for i=1:con
@@ -205,8 +205,9 @@ for i=1:360
         
     end
 end
-s(1,1)=2;
-global s
+global V
+V=s;
+s(1,1)=2; %cheeky adjustment
 for i=1:20
 [maxValue, linearIndexesOfMaxes] = max(s(:));
 maxs(i)=maxValue/con;
@@ -217,20 +218,22 @@ s(rowsOfMaxes, colsOfMaxes)=0;
 end
 set(handles.thetac,'string',x(1));
 set(handles.equ,'string',final(1));
-x;
-final;
+x
+final
 
-x_data=[46 38 25 13 5 7 7 9 19 31 42 47];
-y_data=[171 167 162 150 102 58 76 132 163 174 176 175];
-figure;
-plot(x_data,'r-o')
-hold on 
-plot(y_data,'b-o')
-legend('Tilt angle','Azimuth')
-title('Angles of orientation')
-xlabel('Time(months)');
-ylabel('Angles(degree)');
-grid on;
+%x_data=[46 38 25 13 5 7 7 9 19 31 42 47];
+%y_data=[171 167 162 150 102 58 76 132 163 174 176 175];
+% x_data=[59 59 57 60 72 87 88 73 55 86 80 83];
+% y_data=[239 239 256 275 290 295 294 284 264 266 245 242];
+% figure;
+% plot(x_data,'r-o')
+% hold on 
+% plot(y_data,'b-o')
+% legend('Tilt angle','Azimuth')
+% title('Angles of orientation')
+% xlabel('Time(months)');
+% ylabel('Angles(degree)');
+% grid on;
 
 
 % --- Executes on button press in pushbutton2.
@@ -241,10 +244,9 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 c_info = getCursorInfo(handles.dcm_obj);
 lat=c_info.Position(1,2);
 lon=c_info.Position(1,1);
-gmt=floor(lon/15);
-% gmt=double2str(gmt);
-set(handles.gmt,'string',gmt);
 latstr=num2str(lat);
 lonstr=num2str(lon);
+gmtstr=num2str(round(lon/15));
+set(handles.gmt,'string',gmtstr);
 set(handles.lat,'string',latstr);
 set(handles.lon,'string',lonstr);
